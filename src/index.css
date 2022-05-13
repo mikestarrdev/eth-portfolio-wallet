@@ -14,13 +14,65 @@ button {
   border: solid black 1px;
 }
 
+/* CSS */
+button {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover {
+  background-color: #fff;
+}
+
+button:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  button {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  background: lightgray;
+  padding: 1rem;
+  border: solid gray 1px;
+}
+
+.navitem {
+  margin: 0 0.5rem;
+}
+
+nav.ul {
+  display: inline;
+}
+
 .wallet {
   padding: 1rem;
 }
 
 .warning {
+  margin: 1rem, auto;
   color: red;
-  font-weight: bold;
   text-align: left;
 }
 
@@ -29,7 +81,7 @@ button {
   background-color: lightyellow;
   padding: 2rem;
   border: dashed red 2px;
-  margin: 1rem auto;
+  margin: 2rem auto;
   text-align: center;
   font-size: large;
 }
