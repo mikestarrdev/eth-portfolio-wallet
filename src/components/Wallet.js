@@ -33,16 +33,14 @@ function Wallet({ userWallet, setUserWallet }) {
             <p>
               Address: <strong>{userWallet.address}</strong>
             </p>
-            <p>
-              <span className="warning">
-                ATTENTION: do NOT reveal this 12-word mnemonic phrase to anyone!
-                It can be used to recover your wallet, but also to steal your
-                funds! Write down these 12 words in a safe place which is NOT
-                your computer
-              </span>
-              <br />
-              <p className="mnemonic">{userWallet.mnemonic.phrase}</p>
+            <p className="warning">
+              ATTENTION: do NOT reveal this mnemonic phrase to anyone! It can be
+              used to recover your wallet, but also to steal your funds! Write
+              down these 12 words in a safe place which is NOT your computer
             </p>
+            <br />
+            <p className="mnemonic">{userWallet.mnemonic.phrase}</p>
+
             <p>
               Click "confirm" after you've secured your mnemonic phrase. (You
               will NEVER be able to view it again)

@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>Welcome To Your Crypto Dashboard</h1>
+        <h1>Crypto Dashboard</h1>
       </header>
       <Wallet userWallet={userWallet} setUserWallet={setUserWallet} />
     </>
