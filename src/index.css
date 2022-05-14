@@ -50,12 +50,24 @@ button:active {
   }
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1rem auto;
+}
+
 .navbar {
   display: flex;
   flex-direction: row;
   background: lightgray;
   padding: 1rem;
   border: solid gray 1px;
+  font-weight: bold;
+}
+
+a:visited {
+  text-decoration: none;
 }
 
 .navitem {

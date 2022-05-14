@@ -1,16 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import SendMoney from "./SendMoney";
-import Wallet from "./Wallet";
+import Wallet from "./CreateWallet";
 
 function NavBar() {
   return (
     <nav className="navbar">
       <div className="navitem">
-        <NavLink to={<Wallet />}>Create Wallet</NavLink>
+        <NavLink to="/">Home</NavLink>
       </div>
       <div className="navitem">
-        <NavLink to={<SendMoney />}>Send Money</NavLink>
+        <NavLink to="create-wallet">Create Wallet</NavLink>
+      </div>
+      <div className="navitem">
+        <NavLink to="send-money">Send Money</NavLink>
       </div>
     </nav>
   );
