@@ -1,7 +1,8 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import NavBar from "./components/Navbar";
+import Swap from "./components/Swap";
 import CreateWallet from "./components/CreateWallet";
 import SendMoney from "./components/SendMoney";
 
@@ -19,6 +20,7 @@ function App() {
       </header>
 
       <Routes>
+        <Route path="swap" element={<Swap />} />
         <Route
           path="create-wallet"
           element={

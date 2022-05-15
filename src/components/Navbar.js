@@ -1,7 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import SendMoney from "./SendMoney";
-import Wallet from "./CreateWallet";
 
 function NavBar() {
   return (
