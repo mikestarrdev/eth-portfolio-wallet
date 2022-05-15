@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 const { ethers } = require("ethers");
 require("dotenv").config();
 
+console.log(process.env.INFURA_API_KEY);
+
 function SendMoney() {
   const [walletType, setWalletType] = useState("mnemonic");
   const [encryptedJSON, setEncryptedJSON] = useState();
@@ -23,8 +25,8 @@ function SendMoney() {
     e.preventDefault();
     setTxSent(true);
 
-    const INFURA_ID = process.env.INFURA_ID;
-    const provider = new ethers.providers.JsonRpcProvider(
+    const INFURA_ID = process.env.INFURA_API_KEY;
+    const PROVIDER = new ethers.providers.JsonRpcProvider(
       `https://rinkeby.infura.io/v3/${INFURA_ID}`
     );
 
@@ -36,9 +38,9 @@ function SendMoney() {
         ? (wallet = new ethers.Wallet.fromEncryptedJson(
             encryptedJSON,
             password
-          )).connect(provider)
+          )).connect(PROVIDER)
         : (walletMnemonic = new ethers.Wallet.fromMnemonic(mnemonic).connect(
-            provider
+            PROVIDER
           ));
     }
 
