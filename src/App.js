@@ -12,6 +12,9 @@ function App() {
     <>
       <header>
         <h1>Crypto Dashboard</h1>
+        <p style={{ textAlign: "center" }}>
+          This DApp uses Ethereum's Rinkeby test network...
+        </p>
         <NavBar />
       </header>
 

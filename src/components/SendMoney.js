@@ -5,37 +5,44 @@ const { ethers } = require("ethers");
 require("dotenv").config();
 
 function SendMoney() {
-  const [walletType, setWalletType] = useState("encrypted-JSON");
+  const [walletType, setWalletType] = useState("mnemonic");
   const [encryptedJSON, setEncryptedJSON] = useState();
   const [mnemonic, setMnemonic] = useState("");
-  const [addressFrom, setAddressFrom] = useState("");
   const [addressTo, setAddressTo] = useState("");
   const [units, setUnits] = useState("Ether");
-  const [amount, setAmount] = useState(0);
-  const [gas, setGas] = useState(21000);
+  const [amount, setAmount] = useState("");
+  //   const [gas, setGas] = useState(21000);
   const [key, setKey] = useState("0x");
   const [password, setPassword] = useState("");
-  const [tx, setTx] = useState({});
+  const [tx, setTx] = useState();
+  const [txSent, setTxSent] = useState(false);
 
   let navigate = useNavigate();
 
   const signTransaction = async (e) => {
+    e.preventDefault();
+    setTxSent(true);
+
     const INFURA_ID = process.env.INFURA_ID;
     const provider = new ethers.providers.JsonRpcProvider(
       `https://rinkeby.infura.io/v3/${INFURA_ID}`
     );
-    const signer = provider.getSigner();
+
     let wallet;
+    let walletMnemonic;
+
     {
       encryptedJSON
         ? (wallet = new ethers.Wallet.fromEncryptedJson(
             encryptedJSON,
             password
-          ))
-        : (wallet = new ethers.Wallet(key, provider));
+          )).connect(provider)
+        : (walletMnemonic = new ethers.Wallet.fromMnemonic(mnemonic).connect(
+            provider
+          ));
     }
 
-    const tx = await wallet.sendTransaction({
+    const tx = await walletMnemonic.sendTransaction({
       to: addressTo,
       value: ethers.utils.parseEther(amount),
     });
@@ -54,9 +61,10 @@ function SendMoney() {
             onChange={(e) => {
               setWalletType(e.target.value);
             }}
+            value={walletType}
           >
+            <option value="mnemonic">Mnemonic</option>
             <option value="encrypted-JSON">Encrypted JSON</option>
-            <option value="mnemonic">Mnemonic phrase</option>
             <option value="create-wallet">Create new wallet</option>
           </select>
         </label>
@@ -73,7 +81,12 @@ function SendMoney() {
         {walletType === "encrypted-JSON" ? (
           <>
             <label>
-              Upload JSON keystore: <input type="file" />
+              Upload JSON keystore: <input type="file" required={true} />
+            </label>
+            <br />
+            <label>
+              Enter password:{" "}
+              <input type="password" value={password} required={true} />
             </label>
             <br />
           </>
@@ -93,22 +106,13 @@ function SendMoney() {
         )}
 
         <label>
-          Your address:{" "}
-          <input
-            onChange={(e) => setAddressFrom(e.target.value)}
-            type="text"
-            value={addressFrom}
-            placeholder="your address..."
-          />
-        </label>
-        <br />
-        <label>
           Recipient address:{" "}
           <input
             onChange={(e) => setAddressTo(e.target.value)}
             type="text"
             value={addressTo}
             placeholder="recipient address..."
+            required={true}
           />
         </label>
         <br />
@@ -119,10 +123,11 @@ function SendMoney() {
             type="number"
             value={amount}
             placeholder="amount in Ether"
+            required={true}
           />
         </label>
         <br />
-        <label>
+        {/* <label>
           Gas amount (Gwei):{" "}
           <input
             onChange={(e) => setGas(e.target.value)}
@@ -131,14 +136,35 @@ function SendMoney() {
             placeholder="gas in Gwei"
           />
         </label>
-        <br />
-        <input
-          className="button-54"
-          onSubmit={signTransaction}
-          type="submit"
-          value="Send Transaction"
-        />
+        <br /> */}
+        {!txSent ? (
+          <input
+            className="button-54"
+            onSubmit={signTransaction}
+            type="submit"
+            value="Send Transaction"
+          />
+        ) : (
+          <p>
+            Transaction sent! Please wait while your transaction is mined (this
+            might take a few minutes, depending on network congestion)
+          </p>
+        )}
       </form>
+      {tx ? (
+        <>
+          <p>
+            <a
+              href={`https://rinkeby.etherscan.io/tx/${tx.hash}`}
+              target="_blank"
+            >
+              View transaction on etherscan
+            </a>
+          </p>
+          <br />
+          <button className="button-54">Send another transaction</button>
+        </>
+      ) : null}
     </div>
   );
 }

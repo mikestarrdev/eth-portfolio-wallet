@@ -20,8 +20,6 @@ function CreateWallet({ userWallet, setUserWallet }) {
     setUserWallet();
   }
 
-  // function accessWallet() {}
-
   return (
     <div className="wallet">
       {!walletCreated ? (
@@ -43,8 +41,9 @@ function CreateWallet({ userWallet, setUserWallet }) {
             <p className="mnemonic">{userWallet.mnemonic.phrase}</p>
 
             <p>
-              Click "confirm" after you've written down your mnemonic phrase.
-              (You won't be able to view your mnemonic ever again after)
+              Click "confirm" after you've written down your mnemonic phrase in
+              a secure place. (You won't be able to view your mnemonic after
+              clicking below)
             </p>
             <button onClick={confirmMnemonic}>Confirm</button>
           </div>
