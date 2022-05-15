@@ -43,6 +43,10 @@ function SendMoney() {
       value: ethers.utils.parseEther(amount),
     });
 
+    setMnemonic("");
+    setAddressTo("");
+    setAmount("");
+
     await tx.wait();
     await setTx(tx);
     console.log(tx);
