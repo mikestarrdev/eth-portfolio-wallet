@@ -52,16 +52,6 @@ function SendMoney() {
     console.log(tx);
   };
 
-  function clearForm(e) {
-    e.preventDefault();
-    setWalletType("mnemonic");
-    setMnemonic("");
-    setAddressTo("");
-    setAmount("");
-    setTx("");
-    setTxSent(false);
-  }
-
   return (
     <div>
       <form onSubmit={signTransaction}>
@@ -176,7 +166,14 @@ function SendMoney() {
             </a>
           </p>
           <br />
-          <button onClick={clearForm} className="button-54">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setTxSent(false);
+              setTx("");
+            }}
+            className="button-54"
+          >
             Send another transaction
           </button>
         </>

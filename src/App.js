@@ -55,7 +55,10 @@ function App() {
       </header>
 
       <Routes>
-        <Route path="swap" element={<Swap />} />
+        <Route
+          path="swap"
+          element={<Swap provider={provider} signer={signer} />}
+        />
         <Route
           path="create-wallet"
           element={
