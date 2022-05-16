@@ -7,8 +7,8 @@ require("dotenv").config({ path: "../../env" });
 function SendMoney() {
   const [walletType, setWalletType] = useState("mnemonic");
   const [encryptedJSON, setEncryptedJSON] = useState();
-  const [mnemonic, setMnemonic] = useState(process.env.REACT_APP_MNEMONIC);
-  const [addressTo, setAddressTo] = useState(process.env.REACT_APP_ADDRESS_TO);
+  const [mnemonic, setMnemonic] = useState("");
+  const [addressTo, setAddressTo] = useState("");
   const [amount, setAmount] = useState("");
   //   const [gas, setGas] = useState(21000);
   const [password, setPassword] = useState("");
@@ -51,6 +51,16 @@ function SendMoney() {
     await setTx(tx);
     console.log(tx);
   };
+
+  function clearForm(e) {
+    e.preventDefault();
+    setWalletType("mnemonic");
+    setMnemonic("");
+    setAddressTo("");
+    setAmount("");
+    setTx("");
+    setTxSent(false);
+  }
 
   return (
     <div>
@@ -155,6 +165,8 @@ function SendMoney() {
       {tx ? (
         <>
           <p>
+            Transaction hash {tx.hash}
+            <br />
             <a
               href={`https://rinkeby.etherscan.io/tx/${tx.hash}`}
               target="_blank"
@@ -164,7 +176,9 @@ function SendMoney() {
             </a>
           </p>
           <br />
-          <button className="button-54">Send another transaction</button>
+          <button onClick={clearForm} className="button-54">
+            Send another transaction
+          </button>
         </>
       ) : null}
     </div>
