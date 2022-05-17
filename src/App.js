@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import styled from "styled-components";
+import GlobalStyle from "./GlobalStyles";
 import NavBar from "./components/Navbar";
 import Swap from "./components/Swap";
 import CreateWallet from "./components/CreateWallet";
@@ -35,6 +37,7 @@ function App() {
 
   return (
     <>
+      <GlobalStyle />;
       <header>
         <h1>Crypto Dashboard</h1>
         <p style={{ textAlign: "center" }}>
@@ -53,7 +56,6 @@ function App() {
         )}
         <NavBar />
       </header>
-
       <Routes>
         <Route
           path="swap"
