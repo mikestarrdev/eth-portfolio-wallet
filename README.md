@@ -2,7 +2,7 @@
 
 # DESCRIPTION
 
-The purpose of this project is to gain experience building with Ethers.js, React, and Solidity. I started it as a submission for ETHGlobal's HackMoney hackathon
+The purpose of this project is to gain experience building with Ethers.js, React, and Solidity. This project started as a submission for ETHGlobal's HackMoney hackathon. I'll update this README as the project evolves
 
 # FEATURES
 
